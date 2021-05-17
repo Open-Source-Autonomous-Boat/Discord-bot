@@ -1,0 +1,16 @@
+name: Accepted Issues Automation
+on:
+  issues:
+    types: labeled
+
+jobs:
+  accepted-issues-automation:
+    if: "${{ github.event.label.name == 'Status: Accepted' }}"
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+    - uses: alex-page/github-project-automation-plus@v0.7.1
+      with:
+        project: OSAB General
+        column: Discord Bot
+        repo-token: ${{ secrets.PAT }}
