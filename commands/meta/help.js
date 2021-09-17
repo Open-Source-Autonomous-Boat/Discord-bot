@@ -27,15 +27,14 @@ module.exports = class HelpCommand extends commando.Command {
         let commands_info = require("../../assets/commands_info.json")
         let channel_type = msg.channel.type;
 
-        
+
 
         let prefix;
         let prefix_message = "";
         if (channel_type === "dm") {
             prefix = ""
-          
-              }
-        else if (channel_type === "group") {
+
+        } else if (channel_type === "group") {
             prefix = "@OSAB"
         }
         else {
@@ -68,24 +67,23 @@ module.exports = class HelpCommand extends commando.Command {
             let staff_cmds = " `dm` , `announce` , `set-status` , `poll` , `embed` , `delete` "
             let meta_cmds = "`info` , `server` , `help` , `mail` , `user`"
          
-        const helpEmbed = new Discord.MessageEmbed()
-            .setColor(embed_color)
-            .setTitle("OSAB's Commands")
-            .setURL('https://osab.xyz/')
-            .setAuthor('OSAB', this.client.user.avatarURL)
-            .setDescription(prefix_message)
-            .setThumbnail(this.client.user.avatarURL)
-            .addFields(
-                { name: '**Search Commands** ', value: search_cmds },
-                { name: '**Meta Commamds** ', value: meta_cmds},
-                { name: '**Moderation Commands**', value: mod_cmds},
-                { name: '**Staff Commands** ' , value: staff_cmds},
-               )
-        
-            .setTimestamp()
-            .setFooter('!help <command>')
+            const helpEmbed = new Discord.MessageEmbed()
+                .setColor(embed_color)
+                .setTitle("OSAB's Commands")
+                .setURL('https://osab.xyz/')
+                .setAuthor('OSAB', this.client.user.avatarURL)
+                .setDescription(prefix_message)
+                .setThumbnail(this.client.user.avatarURL)
+                .addFields(
+                    { name: '**Search Commands** ', value: search_cmds },
+                    { name: '**Meta Commamds** ', value: meta_cmds },
+                    { name: '**Moderation Commands**', value: mod_cmds },
+                    { name: '**Staff Commands** ' , value: staff_cmds },
+                )
+                .setTimestamp()
+                .setFooter('!help <command>')
 
-                msg.channel.send({
+            msg.channel.send({
                 embed: helpEmbed
             })
 
@@ -132,7 +130,7 @@ module.exports = class HelpCommand extends commando.Command {
             }
         }
 
-        function getRandomNumber(min, max) {
+        let getRandomNumber = (min, max) => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 

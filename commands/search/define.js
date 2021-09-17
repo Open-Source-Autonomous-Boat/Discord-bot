@@ -14,9 +14,7 @@ module.exports = class DefineCommand extends commando.Command {
             group: 'search',
             memberName: 'define',
             description: "Get a definition of a word.",
-            details: oneLine`
-            Get a definition of a word.
-			`,
+            details: "Get a definition of a word.",
             examples: ["define technology"],
         });
     }
@@ -25,9 +23,7 @@ module.exports = class DefineCommand extends commando.Command {
         let text = args;
         if (args.length < 1) {
             msg.reply("Add a word(s) to your command, so I know what word(s) you'd like the definition of.\nEg: `;define technology`")
-        }
-
-        else {
+        } else {
 
             // Necessary for choosing random colours for rich embeds
             

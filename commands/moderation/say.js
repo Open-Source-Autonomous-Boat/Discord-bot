@@ -13,8 +13,7 @@ module.exports = class MuteCommand extends commando.Command {
       aliases: [],
       memberName: 'say',
       group: 'moderation',
-      description:
-        'Announce stuff!',
+      description: 'Announce stuff!',
       guildOnly: true,
       userPermissions: ['ADMINISTRATOR'],
       cooldown: 15000,

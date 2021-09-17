@@ -27,7 +27,7 @@ module.exports = class NicknameCommand extends Command {
             prompt: 'What name do you want to change their nickname to?',
             type: 'string'
         }
-    ]
+      ]
     });
   }
 
@@ -47,7 +47,7 @@ module.exports = class NicknameCommand extends Command {
       .setTimestamp();
 
     if (msg.deletable) {
-        msg.delete();
+      msg.delete();
     }
 
     msg.say(nicknameEmbed);

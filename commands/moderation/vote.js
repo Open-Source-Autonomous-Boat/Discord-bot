@@ -9,7 +9,7 @@ module.exports = class VoteCommand extends Command {
         super(client, {
             name: 'vote',
             group: 'moderation',
-          aliases: ['poll'], 
+            aliases: ['poll'], 
             memberName: 'vote',
             description: "Starts a yes/no/neutral vote.",
             userPermissions: ['MANAGE_MESSAGES'],
@@ -51,13 +51,13 @@ module.exports = class VoteCommand extends Command {
             
             embed.setFooter(`Beyond Voting`)
             
-        msg.delete();
-        
-        msg.channel.send({embed: embed}).then(embedMessage => {
-    embedMessage.react('👍')
-    embedMessage.react('👎')
-    embedMessage.react('🤷')
+            msg.delete();
+            
+            msg.channel.send({embed: embed}).then(embedMessage => {
+                embedMessage.react('👍')
+                embedMessage.react('👎')
+                embedMessage.react('🤷')
             .catch(console.error);
-    })
-   }
+        })
+    }
 };

@@ -14,8 +14,7 @@ module.exports = class MuteCommand extends commando.Command {
       aliases: [],
       memberName: 'announce',
       group: 'moderation',
-      description:
-        'Announce stuff!',
+      description: 'Announce stuff!',
       guildOnly: true,
       userPermissions: ['ADMINISTRATOR'],
       cooldown: 15000,
@@ -41,25 +40,25 @@ module.exports = class MuteCommand extends commando.Command {
     const if_has_ac = db.has('announcment');
     
     if (if_has_ac === true) {
-        db.delete('announcment');
+      db.delete('announcment');
         
-        db.set('announcment', reason);
+      db.set('announcment', reason);
   
-      }
+    }
     else {
-        db.set('announcment', reason);
+      db.set('announcment', reason);
     }
     
     
     
 
-      message.client.channels.cache.get(announce_channel).send(reason);
+    message.client.channels.cache.get(announce_channel).send(reason);
       
-        const announceMsg = new Discord.MessageEmbed()
-          .addField(' 🔔 **New Announcment was posted!**', `Posted by: <@${message.author.id}>`)
-          .addField('Message', reason)
-          .setTimestamp()
-          .setColor(embed_color);
+    const announceMsg = new Discord.MessageEmbed()
+      .addField(' 🔔 **New Announcment was posted!**', `Posted by: <@${message.author.id}>`)
+      .addField('Message', reason)
+      .setTimestamp()
+      .setColor(embed_color);
     
     message.reply({ embed: announceMsg })
       

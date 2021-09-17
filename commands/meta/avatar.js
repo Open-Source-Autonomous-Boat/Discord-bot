@@ -23,14 +23,14 @@ module.exports = class AvatarCommand extends commando.Command {
 
 	run(msg, { user }) {
 		const format = user.avatar && user.avatar.startsWith('a_') ? 'gif' : 'png';
+
+
+		const embed = new Discord.MessageEmbed()
+		.setColor(embed_color)
+		.setTitle(`${user} avatar`)
+		.setImage(user.displayAvatarURL({ format, size: 2048 }))
+		.setTimestamp()
 		
-    
-    const embed = new Discord.MessageEmbed()
-    .setColor(embed_color)
-    .setTitle(`${user} avatar`)
-    .setImage(user.displayAvatarURL({ format, size: 2048 }))
-    .setTimestamp()
-    
-    msg.channel.send(embed)
+		msg.channel.send(embed)
 	}
 };

@@ -10,8 +10,7 @@ module.exports = class MuteCommand extends Command {
       aliases: [],
       memberName: 'dm',
       group: 'moderation',
-      description:
-        'Dm a member!',
+      description: 'Dm a member!',
       guildOnly: true,
       userPermissions: ['BAN_MEMBERS'],
       clientPermissions: ['MANAGE_ROLES'],
@@ -50,27 +49,27 @@ module.exports = class MuteCommand extends Command {
       return message.channel.send('❌ Please try again with a valid user.');
   
       
-      const kickembed2 = new Discord.MessageEmbed()
+    const kickembed2 = new Discord.MessageEmbed()
       .setColor('ff0000')
       .setTitle('❌ `I can not interact with that user. I need premission MANAGE_ROLES.`')
 
-      if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply({ embed: kickembed2});
+    if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply({ embed: kickembed2});
       
     
     user.send(`${reason} \n\n Use **;mail <your message>** to reply! \n- Sincerely the **OSAB** Team`).then(() => {
-    
 
-    
-    
-    
-        const muteEmbed = new Discord.MessageEmbed()
-          .addField('📝 DMed:', userToMute)
-          .addField('Message', reason)
-          .addField('Moderator', `<@${message.author.id}> | ${message.author.tag}`)
-          .setTimestamp()
-          .setColor(embed_color);
-        message.channel.send(muteEmbed);
-      
+
+
+
+
+      const muteEmbed = new Discord.MessageEmbed()
+        .addField('📝 DMed:', userToMute)
+        .addField('Message', reason)
+        .addField('Moderator', `<@${message.author.id}> | ${message.author.tag}`)
+        .setTimestamp()
+        .setColor(embed_color);
+      message.channel.send(muteEmbed);
+
     });
   }
 };

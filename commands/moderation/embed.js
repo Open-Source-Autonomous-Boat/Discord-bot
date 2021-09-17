@@ -12,8 +12,7 @@ module.exports = class MuteCommand extends commando.Command {
       aliases: [],
       memberName: 'embed',
       group: 'moderation',
-      description:
-        'Make an embed!',
+      description: 'Make an embed!',
       guildOnly: true,
       userPermissions: ['ADMINISTRATOR'],
       cooldown: 15000,
@@ -47,23 +46,23 @@ module.exports = class MuteCommand extends commando.Command {
   async run(message, { title, description, image, channel }) {
     
     
-      const embed = new Discord.MessageEmbed()
-       .setColor(embed_color)
+    const embed = new Discord.MessageEmbed()
+      .setColor(embed_color)
       .setTitle(title)
       .setDescription(description)
       .setImage(image)
       .setTimestamp()
       
       
-      const log_embed = new Discord.MessageEmbed()
-       .setColor(embed_color)
+    const log_embed = new Discord.MessageEmbed()
+      .setColor(embed_color)
       .setTitle('🖊️ **Made a new embed**')
       .setDescription(`Posted in ${channel}   |    by ${message.author.tag}`)
       .setTimestamp()
-      
+
      
-      message.client.channels.cache.get(channel).send({ embed: embed});
+    message.client.channels.cache.get(channel).send({ embed: embed});
     message.reply(log_embed)
-    
+
   }
 };

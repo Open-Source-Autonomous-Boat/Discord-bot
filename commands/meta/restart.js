@@ -20,10 +20,10 @@ module.exports = class CatsCommand extends commando.Command {
     }
 
      async run(msg) {
-       console.log('Restarting...')
-       msg.reply('Restaring...')
+        console.log('Restarting...')
+        msg.reply('Restaring...')
         process.exit();
         
     }
-    };
+};
 

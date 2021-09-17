@@ -24,9 +24,7 @@ module.exports = class PixabayCommand extends commando.Command {
         let text = args;
         if (args.length < 1) {
             msg.reply("Add some search terms to your command, so I know what photos to get you \nEg: ;pixabay night sky");
-        }
-
-        else {
+        } else {
             // Necessary for choosing random colours for rich embeds
             
 
@@ -72,7 +70,7 @@ module.exports = class PixabayCommand extends commando.Command {
                 .catch(err => { throw err });
 
         }
-        function getRandomNumber(min, max) {
+        let getRandomNumber = (min, max) => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 

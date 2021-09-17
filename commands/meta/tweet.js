@@ -17,12 +17,12 @@ const instaClient = new Instagram({ username, password })
 const Discord = require('discord.js');
 
 const client = new twitter({
-  subdomain: "api", // "api" is the default (change for other subdomains)
-  version: "1.1", // version "1.1" is the default (change for other subdomains)
-  consumer_key: API_KEY, // from Twitter.
-  consumer_secret: API_KEY_SECRET, // from Twitter.
-  access_token_key: ACCES_TOKEN, // from your User (oauth_token)
-  access_token_secret: ACCES_SECRET // from your User (oauth_token_secret)
+    subdomain: "api", // "api" is the default (change for other subdomains)
+    version: "1.1", // version "1.1" is the default (change for other subdomains)
+    consumer_key: API_KEY, // from Twitter.
+    consumer_secret: API_KEY_SECRET, // from Twitter.
+    access_token_key: ACCES_TOKEN, // from your User (oauth_token)
+    access_token_secret: ACCES_SECRET // from your User (oauth_token_secret)
 });
 
 let name = "tweet"
@@ -37,35 +37,33 @@ module.exports = class CatsCommand extends commando.Command {
             description: "Get a message vith virtual buble wrap, amd enjoy poping each bubble! ",
             details: "Get a tweet vith virtual buble wrap, amd enjoy poping each bubble! ",
             examples: ["restart"],
-          args: [
-        {
-          key: 'text',
-          prompt:
-            'What do you wanna tweet? Keep it short, or I will short it. \n',
-          type: 'string'
-        }
-            
+            args: [
+                {
+                    key: 'text',
+                    prompt: 'What do you wanna tweet? Keep it short, or I will short it. \n',
+                    type: 'string'
+                }
             ]
 
         });
     }
 
-     async run(msg, { text }) { 
+    async run(msg, { text }) { 
        
-      const  the_text = truncate(text, 275);
+        const  the_text = truncate(text, 275);
 
-       // ======= TWITTER ======= //
+        // ======= TWITTER ======= //
        
-       client.post('statuses/update', { status: the_text }).then(result => {
-         const embed = new Discord.MessageEmbed()
-         .setColor(embed_color)
-         .setTitle('**New Tweet**')
-         .addField('Content:', the_text)
-         .setTimestamp()
-  msg.channel.send(embed)
-         
-}).catch(console.error);
+        client.post('statuses/update', { status: the_text }).then(result => {
+            const embed = new Discord.MessageEmbed()
+                .setColor(embed_color)
+                .setTitle('**New Tweet**')
+                .addField('Content:', the_text)
+                .setTimestamp()
+            msg.channel.send(embed)
+
+        }).catch(console.error);
        
     }
-    };
+};
 

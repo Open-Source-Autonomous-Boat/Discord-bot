@@ -11,8 +11,7 @@ module.exports = class MuteCommand extends Command {
       aliases: ['mute-user'],
       memberName: 'mute',
       group: 'moderation',
-      description:
-        'Mutes a tagged user (if you have already created a Muted role)',
+      description: 'Mutes a tagged user (if you have already created a Muted role)',
       guildOnly: true,
       userPermissions: ['MANAGE_ROLES'],
       clientPermissions: ['MANAGE_ROLES'],
@@ -59,21 +58,21 @@ module.exports = class MuteCommand extends Command {
       .setTitle('❌ `I can not interact with that user. Please check my and theirs permission!`')
       .setTimestamp()
       
-      const kickembed2 = new Discord.MessageEmbed()
+    const kickembed2 = new Discord.MessageEmbed()
       .setColor(embed_color)
       .setTitle('❌ `I can not interact with that user. I need premission MANAGE_ROLES.`')
       
-      if (message.guild.member(user).hasPermission('ADMINISTRATOR')) return message.reply({ embed: kickembed});
-      if (message.guild.member(user).hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed});
-      if (message.guild.member(user).hasPermission('KICK_MEMBERS')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('ADMINISTRATOR')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('KICK_MEMBERS')) return message.reply({ embed: kickembed});
 		if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply({ embed: kickembed2});
 
     user.roles
       .add(mutedRole)
       .then(() => {
-      
-      user.send(`You have been muted in: ${message.guild.name} ! For: ${reason}`)
-      
+
+        user.send(`You have been muted in: ${message.guild.name} ! For: ${reason}`)
+
         const muteEmbed = new Discord.MessageEmbed()
           .addField('🤐 Muted:', userToMute)
           .addField('Reason', reason)
@@ -82,7 +81,7 @@ module.exports = class MuteCommand extends Command {
           .setColor(embed_color);
         message.channel.send(muteEmbed);
       
-      message.client.channels.cache.get(log_channel).send({ embed: muteEmbed});
+        message.client.channels.cache.get(log_channel).send({ embed: muteEmbed});
       })
       .catch(err => {
         message.say(

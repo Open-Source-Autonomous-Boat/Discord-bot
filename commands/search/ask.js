@@ -28,8 +28,7 @@ module.exports = class AskCommand extends commando.Command {
 
         if (args.length < 1) {
             msg.reply("Add a question to your command, so I can get an answer for you :eyes:\nEg: `;ask what is the velocity of a Boeing 747`");
-        }
-        else {
+        } else {
 
             // Necessary for choosing random colours for rich embeds
             
@@ -46,17 +45,16 @@ module.exports = class AskCommand extends commando.Command {
                     let num_pods = out.queryresult.numpods;
                     if (num_pods === 0) {
                         msg.reply("Sorry, Wolfram|Alpha doesn't have an answer for that question. Try again maybe?")
-                    }
-                    else {
+                    } else {
                         let interpretation = out.queryresult.pods[0].subpods[0].plaintext;
 
                         let answer = out.queryresult.pods[1].subpods[0].plaintext;
 
                         const answerEmbed = new Discord.MessageEmbed()
-                        .setColor(embed_color)
-                        .setTitle(`${interpretation}`)
-                        .setDescription(answer)
-                        .setTimestamp()
+                            .setColor(embed_color)
+                            .setTitle(`${interpretation}`)
+                            .setDescription(answer)
+                            .setTimestamp()
 
                         msg.channel.send({
                             embed: answerEmbed

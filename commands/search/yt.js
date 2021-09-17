@@ -54,7 +54,7 @@ module.exports = class YTCommand extends commando.Command {
             searchYouTube(msg, search_query);
     
         }
-        function getRandomNumber(min, max) {
+        let getRandomNumber = (min, max) => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 

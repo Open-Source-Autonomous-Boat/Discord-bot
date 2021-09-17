@@ -44,13 +44,13 @@ module.exports = class KickCommand extends Command {
       .setTitle('❌ `I can not interact with that user. Please check my and theirs permission!`')
       .setTimestamp()
       
-      const kickembed2 = new Discord.MessageEmbed()
+    const kickembed2 = new Discord.MessageEmbed()
       .setColor(embed_color)
       .setTitle('❌ `I can not interact with that user. I need premission BAN_MEMBERS.`')
       
-      if (message.guild.member(user).hasPermission('ADMINISTRATOR')) return message.reply({ embed: kickembed});
-      if (message.guild.member(user).hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed});
-      if (message.guild.member(user).hasPermission('KICK_MEMBERS')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('ADMINISTRATOR')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('KICK_MEMBERS')) return message.reply({ embed: kickembed});
 		if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed2});
 
     

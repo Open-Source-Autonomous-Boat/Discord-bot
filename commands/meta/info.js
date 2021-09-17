@@ -35,8 +35,7 @@ module.exports = class InfoCommand extends commando.Command {
 
         if (channel_type == "dm") {
             prefix = ""
-        }
-        else {
+        } else {
             // If undefined, then no special prefixes corresponding to that server were found.
             if (row === undefined) {
                 prefix = this.client.commandPrefix;
@@ -80,7 +79,7 @@ module.exports = class InfoCommand extends commando.Command {
                 }
             });
 
-        function getRandomNumber(min, max) {
+        let getRandomNumber = (min, max) => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 

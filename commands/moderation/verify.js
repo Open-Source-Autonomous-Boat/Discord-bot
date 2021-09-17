@@ -12,8 +12,7 @@ module.exports = class MuteCommand extends Command {
       aliases: [],
       memberName: 'verify',
       group: 'moderation',
-      description:
-        'Verifies you',
+      description: 'Verifies you',
       guildOnly: true,
       clientPermissions: ['MANAGE_ROLES'],
       
@@ -41,18 +40,18 @@ module.exports = class MuteCommand extends Command {
       
       
       
-      let messages = [`Hello <@${member}> welcome to **Beyond Earth**! You can go ahead and read <#758766642666405888>, you can also get some roles in <#758766645622865961>, also introduce yourself in <#814203805540679721>! `,
-                  `Hey <@${member}> wecome to ther server! You can go ahead and read <#758766642666405888> and don't forget to get some <#758766645622865961>, also introduce yourself in <#814203805540679721>!`
-                 ]
-  let random = Math.floor(Math.random() *  messages.length);
-  
+        let messages = [`Hello <@${member}> welcome to **Beyond Earth**! You can go ahead and read <#758766642666405888>, you can also get some roles in <#758766645622865961>, also introduce yourself in <#814203805540679721>! `,
+                        `Hey <@${member}> wecome to ther server! You can go ahead and read <#758766642666405888> and don't forget to get some <#758766645622865961>, also introduce yourself in <#814203805540679721>!`
+        ]
+        let random = Math.floor(Math.random() *  messages.length);
 
-  let randomMessage = messages[random];
-  
-  
-    
-  message.client.channels.cache.get(general_chat).send(`${randomMessage}`);
-  
+
+        let randomMessage = messages[random];
+
+
+
+        message.client.channels.cache.get(general_chat).send(`${randomMessage}`);
+
       })
       .catch(err => {
         message.say(
