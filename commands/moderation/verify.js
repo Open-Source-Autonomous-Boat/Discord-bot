@@ -1,8 +1,8 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-var embed_color = process.env.EMBED;
-var channel_id = process.env.LOGGING_CHANNEL_ID;
-var general_chat = process.env.GENERAL_CHAT;
+let embed_color = process.env.EMBED;
+let channel_id = process.env.LOGGING_CHANNEL_ID;
+let general_chat = process.env.GENERAL_CHAT;
 
 
 module.exports = class MuteCommand extends Command {
@@ -41,13 +41,13 @@ module.exports = class MuteCommand extends Command {
       
       
       
-      var messages = [`Hello <@${member}> welcome to **Beyond Earth**! You can go ahead and read <#758766642666405888>, you can also get some roles in <#758766645622865961>, also introduce yourself in <#814203805540679721>! `,
+      let messages = [`Hello <@${member}> welcome to **Beyond Earth**! You can go ahead and read <#758766642666405888>, you can also get some roles in <#758766645622865961>, also introduce yourself in <#814203805540679721>! `,
                   `Hey <@${member}> wecome to ther server! You can go ahead and read <#758766642666405888> and don't forget to get some <#758766645622865961>, also introduce yourself in <#814203805540679721>!`
                  ]
   let random = Math.floor(Math.random() *  messages.length);
   
 
-  var randomMessage = messages[random];
+  let randomMessage = messages[random];
   
   
     

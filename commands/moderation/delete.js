@@ -1,10 +1,10 @@
 const commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
 const Discord = require('discord.js');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 
-var name = "delete"
+let name = "delete"
 module.exports = class CatsCommand extends commando.Command {
     constructor(client) {
         super(client, {

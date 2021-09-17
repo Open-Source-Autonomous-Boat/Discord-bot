@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 const Discord = require('discord.js');
 
 

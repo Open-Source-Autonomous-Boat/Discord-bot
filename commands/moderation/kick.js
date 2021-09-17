@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 
 module.exports = class KickCommand extends Command {
   constructor(client) {
@@ -32,7 +32,7 @@ module.exports = class KickCommand extends Command {
   }
 
   run(message, { userToBan, reason }) {
-    var sender = message.author.id;
+    let sender = message.author.id;
     const user =
       message.mentions.members.first() ||
       message.guild.members.fetch(userToBan);

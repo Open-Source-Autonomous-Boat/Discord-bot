@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
-var embed_color = process.env.EMBED;
-var mail_channel = process.env.MAIL_CHANNEL
+let embed_color = process.env.EMBED;
+let mail_channel = process.env.MAIL_CHANNEL
 const Discord = require('discord.js');
 
 
@@ -30,9 +30,9 @@ module.exports = class MuteCommand extends commando.Command {
   }
 
   async run(message, { reason }) {
-    var user_id = message.author.id;
-    var user_tag = message.author.tag;
-    var user = message.author;
+    let user_id = message.author.id;
+    let user_tag = message.author.tag;
+    let user = message.author;
 
     const extractNumber = /\d+/g;
     

@@ -1,9 +1,9 @@
 const commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
 const fetch = require('node-fetch')
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
-var name = "restart"
+let name = "restart"
 module.exports = class CatsCommand extends commando.Command {
     constructor(client) {
         super(client, {

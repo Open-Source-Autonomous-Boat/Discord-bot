@@ -1,8 +1,8 @@
 const commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
-var name = "server"
+let name = "server"
 module.exports = class ServerCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -21,7 +21,7 @@ module.exports = class ServerCommand extends commando.Command {
         // Necessary for choosing random colours for rich embeds
 
 
-        var guild = msg.guild;
+        let guild = msg.guild;
         msg.channel.send(
             {
                 embed: {

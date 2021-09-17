@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 const Discord = require('discord.js');
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 
 module.exports = class MuteCommand extends Command {
   constructor(client) {

@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
 module.exports = class UserInfoCommand extends commando.Command {
 	constructor(client) {

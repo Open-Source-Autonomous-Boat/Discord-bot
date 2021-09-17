@@ -1,18 +1,18 @@
 
 // === .env import === //
-var token = process.env.TOKEN;
-var embed_color = process.env.EMBED;
+let token = process.env.TOKEN;
+let embed_color = process.env.EMBED;
 const nasa_api = process.env.NASA_API;
-var API_KEY = process.env.API_KEY;
-var API_KEY_SECRET = process.env.API_KEY_SECRET;
-var ACCES_TOKEN = process.env.ACCES_TOKEN;
-var ACCES_SECRET = process.env.ACCES_SECRET;
-var username = process.env.INSTA_USER;
-var password = process.env.INSTA_PASS;
-var owner_discord_id = process.env.OWNER_DISCORD_ID;
-var channel_id = process.env.LOGGING_CHANNEL_ID;
-var status_id = process.env.BOT_STATUS_CHANNEL;
-var general_chat = process.env.GENERAL_CHAT;    
+let API_KEY = process.env.API_KEY;
+let API_KEY_SECRET = process.env.API_KEY_SECRET;
+let ACCES_TOKEN = process.env.ACCES_TOKEN;
+let ACCES_SECRET = process.env.ACCES_SECRET;
+let username = process.env.INSTA_USER;
+let password = process.env.INSTA_PASS;
+let owner_discord_id = process.env.OWNER_DISCORD_ID;
+let channel_id = process.env.LOGGING_CHANNEL_ID;
+let status_id = process.env.BOT_STATUS_CHANNEL;
+let general_chat = process.env.GENERAL_CHAT;    
 
 // === TWITTER NPM === //
 const twitter = require('twitter-lite');
@@ -71,7 +71,7 @@ const client = new commando.Client({
   unknownCommandResponse: false
 });
 
-var bot_prefix = "!";
+let bot_prefix = "!";
 // ==== READY EVENT ==== ///
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}`); 
@@ -94,9 +94,9 @@ client.on("ready", async () => {
   // === clock === //
   setInterval(function() {
     
-    var d = new Date(); // for now
-var hour = d.getHours(); // => 9
-var minute = d.getMinutes(); // =>  30
+    let d = new Date(); // for now
+let hour = d.getHours(); // => 9
+let minute = d.getMinutes(); // =>  30
     
     const time = hour + ":" + minute 
     console.log(time)
@@ -128,7 +128,7 @@ client
   .on("commandError", (cmd, err) => {
     console.log("command error");
     if (err instanceof commando.FriendlyError) return;
-    var message = `Error in command ${cmd.groupID}:${cmd.memberName}, ${err}`;
+    let message = `Error in command ${cmd.groupID}:${cmd.memberName}, ${err}`;
      console.log(` ${message}`);
   })
   .on("commandBlocked", (msg, reason) => {
@@ -139,7 +139,7 @@ client
     msg.reply("Command has been blocked.");
   })
   .on("commandPrefixChange", async (guild, prefix) => {
-    var message = `Prefix ${
+    let message = `Prefix ${
       prefix === "" ? "removed" : `changed to ${prefix || "the default"}`
     } ${guild ? `in guild ${guild.name} (${guild.id})` : "globally"}.`;
     client.channels.cache.get(channel_id).send(` ${message}`);
@@ -148,7 +148,7 @@ client
   })
   .on("commandStatusChange", (guild, command, enabled) => {
 
-    var message = `Command ${command.groupID}:${command.memberName} ${
+    let message = `Command ${command.groupID}:${command.memberName} ${
       enabled ? "enabled" : "disabled"
     } ${guild ? `in guild ${guild.name} (${guild.id})` : "globally"}.`;
     console.log(`  ${message}`);
@@ -167,9 +167,9 @@ client
      "wave", "poke", "info", "invite", "pop", "donate"];
 
     if (msg.author.bot) return;
-       var guild_id = msg.channel.guild.id;
-       var prefix;
-    var message = "Message";
+       let guild_id = msg.channel.guild.id;
+       let prefix;
+    let message = "Message";
 
     if (msg.channel.type === "dm") {
       console.log(`${msg.content}`);
@@ -232,7 +232,7 @@ client.on("message", function(message) {
   //Bad Words
   
   let foundInText = false;
-for (var i in bad_words) {
+for (let i in bad_words) {
   if(message.content.toLowerCase().includes(bad_words[i].toLowerCase())) foundInText = true;
 }
 
@@ -244,7 +244,7 @@ if(foundInText) {
   // LINKS
   
   let uoundInText = false;
-for (var i in bad_links) {
+for (let i in bad_links) {
   if(message.content.toLowerCase().includes(bad_links[i].toLowerCase())) uoundInText = true;
 }
 
@@ -256,7 +256,7 @@ if(uoundInText) {
   //NSFW
   
   let doundInText = false;
-for (var i in nsfw) {
+for (let i in nsfw) {
   if(message.content.toLowerCase().includes(nsfw[i].toLowerCase())) doundInText = true;
 }
 
@@ -271,7 +271,7 @@ if(doundInText) {
   
       
   if (message.content.includes("!d bump")) {
-        var responseString = `I will remind you to bump again in 2 hours! <@!${message.author.id}>`;
+        let responseString = `I will remind you to bump again in 2 hours! <@!${message.author.id}>`;
         message.channel.send(responseString);
     setTimeout(() => {
            message.channel.send(`<@!${message.author.id}> 🕒 2 hours have passed, bump the server again!`);

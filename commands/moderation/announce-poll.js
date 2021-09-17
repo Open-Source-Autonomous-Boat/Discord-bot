@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const oneLine = require('common-tags').oneLine;
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
 
 module.exports = class VoteCommand extends Command {

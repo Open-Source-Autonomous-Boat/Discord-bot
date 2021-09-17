@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
 module.exports = class AvatarCommand extends commando.Command {
 	constructor(client) {

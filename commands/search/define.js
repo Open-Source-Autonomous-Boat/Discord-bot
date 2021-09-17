@@ -2,10 +2,10 @@ const commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
 const fetch = require("node-fetch");
 const wolfram_alpha_id = process.env.WOLFRAM_ALPHA_APP_ID;
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
 
-var name = "define"
+let name = "define"
 module.exports = class DefineCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -22,7 +22,7 @@ module.exports = class DefineCommand extends commando.Command {
     }
 
     async run(msg, args) {
-        var text = args;
+        let text = args;
         if (args.length < 1) {
             msg.reply("Add a word(s) to your command, so I know what word(s) you'd like the definition of.\nEg: `;define technology`")
         }
@@ -31,23 +31,23 @@ module.exports = class DefineCommand extends commando.Command {
 
             // Necessary for choosing random colours for rich embeds
             
-            var search_term = text;
+            let search_term = text;
             search_term = "define " + search_term;
-            var url_encoded_search_term = search_term.split(" ").join("%20")
-            var ask_link = `http://api.wolframalpha.com/v2/query?appid=${wolfram_alpha_id}&input=${url_encoded_search_term}&output=json`
+            let url_encoded_search_term = search_term.split(" ").join("%20")
+            let ask_link = `http://api.wolframalpha.com/v2/query?appid=${wolfram_alpha_id}&input=${url_encoded_search_term}&output=json`
             console.log("ask link: ", ask_link);
 
             fetch(ask_link)
                 .then(res => res.json())
                 .then((out) => {
-                    var num_pods = out.queryresult.numpods;
+                    let num_pods = out.queryresult.numpods;
                     if (num_pods === 0) {
                         msg.reply("Sorry, Wolfram|Alpha doesn't have a definition for that word. Try again maybe?")
                     }
                     else {
-                        var interpretation = out.queryresult.pods[0].subpods[0].plaintext;
+                        let interpretation = out.queryresult.pods[0].subpods[0].plaintext;
 
-                        var answer = out.queryresult.pods[1].subpods[0].plaintext;
+                        let answer = out.queryresult.pods[1].subpods[0].plaintext;
 
 
                         msg.channel.send({

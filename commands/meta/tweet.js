@@ -1,14 +1,14 @@
 const commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
 const fetch = require('node-fetch')
-var truncate = require('truncate');
-var embed_color = process.env.EMBED; 
-var API_KEY = process.env.API_KEY;
-var API_KEY_SECRET = process.env.API_KEY_SECRET;
-var ACCES_TOKEN = process.env.ACCES_TOKEN;
-var ACCES_SECRET = process.env.ACCES_SECRET;
-var username = process.env.INSTA_USER;
-var password = process.env.INSTA_PASS;
+let truncate = require('truncate');
+let embed_color = process.env.EMBED; 
+let API_KEY = process.env.API_KEY;
+let API_KEY_SECRET = process.env.API_KEY_SECRET;
+let ACCES_TOKEN = process.env.ACCES_TOKEN;
+let ACCES_SECRET = process.env.ACCES_SECRET;
+let username = process.env.INSTA_USER;
+let password = process.env.INSTA_PASS;
 
 const twitter = require('twitter-lite');
 const Instagram = require('instagram-web-api')
@@ -25,7 +25,7 @@ const client = new twitter({
   access_token_secret: ACCES_SECRET // from your User (oauth_token_secret)
 });
 
-var name = "tweet"
+let name = "tweet"
 module.exports = class CatsCommand extends commando.Command {
     constructor(client) {
         super(client, {
