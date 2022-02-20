@@ -2,8 +2,8 @@ const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('./database.json');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 
 
 module.exports = class MuteCommand extends Command {
@@ -13,8 +13,7 @@ module.exports = class MuteCommand extends Command {
       aliases: [],
       memberName: 'ser-status',
       group: 'moderation',
-      description:
-        'Set bot status',
+      description: 'Set bot status',
       guildOnly: true,
       userPermissions: ['ADMINISTRATOR'],
       clientPermissions: ['MANAGE_ROLES'],
@@ -38,7 +37,7 @@ module.exports = class MuteCommand extends Command {
 
   async run(message, { type, text }) {
     
-   const if_has_txt = db.has('status_txt');
+    const if_has_txt = db.has('status_txt');
     const if_has_type = db.has('status_type');
     
     if (if_has_txt === true) {
@@ -55,15 +54,15 @@ module.exports = class MuteCommand extends Command {
     }
     
       
-        const muteEmbed = new Discord.MessageEmbed()
-          .addField('🖊️ Status set to:', text)
-          .addField('Status', type)
-          .addField('Moderator', `<@${message.author.id}>`)
-          .setTimestamp()
-          .setColor(embed_color);
-        message.channel.send(muteEmbed);
+    const muteEmbed = new Discord.MessageEmbed()
+      .addField('🖊️ Status set to:', text)
+      .addField('Status', type)
+      .addField('Moderator', `<@${message.author.id}>`)
+      .setTimestamp()
+      .setColor(embed_color);
+    message.channel.send(muteEmbed);
       
-      message.client.channels.cache.get(log_channel).send({ embed: muteEmbed});
+    message.client.channels.cache.get(log_channel).send({ embed: muteEmbed});
     
     await process.exit();
       

@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 
 
 module.exports = class NicknameCommand extends Command {
@@ -27,7 +27,7 @@ module.exports = class NicknameCommand extends Command {
             prompt: 'What name do you want to change their nickname to?',
             type: 'string'
         }
-    ]
+      ]
     });
   }
 
@@ -47,7 +47,7 @@ module.exports = class NicknameCommand extends Command {
       .setTimestamp();
 
     if (msg.deletable) {
-        msg.delete();
+      msg.delete();
     }
 
     msg.say(nicknameEmbed);

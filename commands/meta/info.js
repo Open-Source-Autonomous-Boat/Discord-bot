@@ -1,15 +1,15 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
-var owner_discord_id = process.env.OWNER_DISCORD_ID;
+let owner_discord_id = process.env.OWNER_DISCORD_ID;
 const oneLine = require('common-tags').oneLine;
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 const fetch = require('node-fetch');
 const sqlite = require('sqlite');
 const client = new Discord.Client();
 sqlite.open("./database.sqlite3");
 
 
-var name = "info"
+let name = "info"
 module.exports = class InfoCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -26,24 +26,23 @@ module.exports = class InfoCommand extends commando.Command {
     async run(msg, { text }) {
         
         // Check Prefix
-        var guild_id = msg.channel.guild.id
-        var channel_type = msg.channel.type;
+        let guild_id = msg.channel.guild.id
+        let channel_type = msg.channel.type;
         console.log(guild_id)
-        var row = await sqlite.get(`SELECT * FROM settings WHERE guild ="${guild_id}"`);
-        var prefix;
+        let row = await sqlite.get(`SELECT * FROM settings WHERE guild ="${guild_id}"`);
+        let prefix;
 
 
         if (channel_type == "dm") {
             prefix = ""
-        }
-        else {
+        } else {
             // If undefined, then no special prefixes corresponding to that server were found.
             if (row === undefined) {
                 prefix = this.client.commandPrefix;
             }
             else {
-                var settings = row.settings;
-                var jsonSettings = JSON.parse(settings);
+                let settings = row.settings;
+                let jsonSettings = JSON.parse(settings);
                 prefix = jsonSettings.prefix;
             }
         }
@@ -80,7 +79,7 @@ module.exports = class InfoCommand extends commando.Command {
                 }
             });
 
-        function getRandomNumber(min, max) {
+        let getRandomNumber = (min, max) => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 

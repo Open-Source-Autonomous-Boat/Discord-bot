@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 
 module.exports = class MuteCommand extends Command {
   constructor(client) {
@@ -10,16 +10,14 @@ module.exports = class MuteCommand extends Command {
       aliases: ['unmute-user'],
       memberName: 'unmute',
       group: 'moderation',
-      description:
-        'Unmutes a tagged user (if you have already created a Muted role)',
+      description: 'Unmutes a tagged user (if you have already created a Muted role)',
       guildOnly: true,
       userPermissions: ['MANAGE_ROLES'],
       clientPermissions: ['MANAGE_ROLES'],
       args: [
         {
           key: 'userToMute',
-          prompt:
-            'Please mention the user you want to unmute with @ or provide their ID \n.',
+          prompt: 'Please mention the user you want to unmute with @ or provide their ID \n.',
           type: 'string'
         },
         {
@@ -58,18 +56,18 @@ module.exports = class MuteCommand extends Command {
       .setTitle('❌ `I can not interact with that user. Please check my and theirs permission!`')
       .setTimestamp()
       
-      const kickembed2 = new Discord.MessageEmbed()
+    const kickembed2 = new Discord.MessageEmbed()
       .setColor(embed_color)
       .setTitle('❌ `I can not interact with that user. I need premission MANAGE_ROLES.`')
       
-      if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed2});
+    if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed2});
 
     user.roles
       .remove(mutedRole)
       .then(() => {
       
-      user.send(`You have been unmuted in: ${message.guild.name} `)
-      
+        user.send(`You have been unmuted in: ${message.guild.name} `)
+
         const muteEmbed = new Discord.MessageEmbed()
           .addField('😀 Unmuted:', userToMute)
           .addField('Reason', reason)
@@ -77,8 +75,8 @@ module.exports = class MuteCommand extends Command {
           .setTimestamp()
           .setColor(embed_color);
         message.channel.send(muteEmbed);
-      
-      message.client.channels.cache.get(log_channel).send({ embed: muteEmbed});
+
+        message.client.channels.cache.get(log_channel).send({ embed: muteEmbed});
       })
       .catch(err => {
         message.say(

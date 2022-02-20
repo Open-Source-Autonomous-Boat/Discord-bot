@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const oneLine = require('common-tags').oneLine;
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
 
 module.exports = class VoteCommand extends Command {
@@ -9,7 +9,7 @@ module.exports = class VoteCommand extends Command {
         super(client, {
             name: 'announce-poll',
             group: 'moderation',
-          aliases: [], 
+            aliases: [],
             memberName: 'announce-poll',
             description: "Starts a yes/no/neutral vote.",
             userPermissions: ['MANAGE_MESSAGES'],
@@ -35,12 +35,12 @@ module.exports = class VoteCommand extends Command {
                         return 'Polling questions must be between 1 and 1000 characters in length.';
                     }
                 },
-              {
-                key: 'channel_id',
-                prompt: "Provide the channel ID",
-                type: 'string'
-              }
-                
+                {
+                    key: 'channel_id',
+                    prompt: "Provide the channel ID",
+                    type: 'string'
+                }
+
             ]
         });
     }
@@ -54,7 +54,7 @@ module.exports = class VoteCommand extends Command {
             .setColor(embed_color)
             .setTimestamp();
             
-            embed.setFooter(`Beyond Voting`)
+        embed.setFooter(`Beyond Voting`)
             
         message.delete();
         
@@ -62,12 +62,11 @@ module.exports = class VoteCommand extends Command {
   
       
         message.client.channels.cache.get(channel_id).send(embed).then(embedMessage => {
-    embedMessage.react('👍')
-    embedMessage.react('👎')
-    embedMessage.react('🤷')
-            .catch(console.error);
+            embedMessage.react('👍').catch(console.error);
+            embedMessage.react('👎').catch(console.error);
+            embedMessage.react('🤷').catch(console.error);
           
-          message.channel.send()
-    })
+            message.channel.send()
+        })
    }
 };

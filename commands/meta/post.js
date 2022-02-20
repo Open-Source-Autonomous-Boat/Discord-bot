@@ -1,14 +1,14 @@
 const commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
 const fetch = require('node-fetch')
-var truncate = require('truncate');
-var embed_color = process.env.EMBED; 
-var API_KEY = process.env.API_KEY;
-var API_KEY_SECRET = process.env.API_KEY_SECRET;
-var ACCES_TOKEN = process.env.ACCES_TOKEN;
-var ACCES_SECRET = process.env.ACCES_SECRET;
-var username = process.env.INSTA_USER;
-var password = process.env.INSTA_PASS;
+let truncate = require('truncate');
+let embed_color = process.env.EMBED; 
+let API_KEY = process.env.API_KEY;
+let API_KEY_SECRET = process.env.API_KEY_SECRET;
+let ACCES_TOKEN = process.env.ACCES_TOKEN;
+let ACCES_SECRET = process.env.ACCES_SECRET;
+let username = process.env.INSTA_USER;
+let password = process.env.INSTA_PASS;
 
 const twitter = require('twitter-lite');
 const Instagram = require('instagram-web-api')
@@ -25,7 +25,7 @@ const client = new twitter({
   access_token_secret: ACCES_SECRET // from your User (oauth_token_secret)
 });
 
-var name = "post"
+let name = "post"
 module.exports = class CatsCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -37,53 +37,51 @@ module.exports = class CatsCommand extends commando.Command {
             description: "Get a message vith virtual buble wrap, amd enjoy poping each bubble! ",
             details: "Get a message vith virtual buble wrap, amd enjoy poping each bubble! ",
             examples: ["restart"],
-          args: [
-        {
-          key: 'text',
-          prompt:
-            'Text to post on socila media, keep it short! \n',
-          type: 'string'
-        },
-            {
-          key: 'img_link',
-          prompt:
-            'Image link to post? (jpg or jpeg)\n',
-          type: 'string'
-        }
+            args: [
+                {
+                    key: 'text',
+                    prompt: 'Text to post on socila media, keep it short! \n',
+                    type: 'string'
+                    },
+                {
+                    key: 'img_link',
+                    prompt:'Image link to post? (jpg or jpeg)\n',
+                    type: 'string'
+                }
             ]
 
         });
     }
 
-     async run(msg, { text, img_link }) { 
-       const photo = img_link;
+    async run(msg, { text, img_link }) { 
+        const photo = img_link;
        
-      const  the_text = truncate(text, 275);
+        const  the_text = truncate(text, 275);
        
-       // ====== INSTAGRAM ======= //
-       await instaClient.login()
-  // Upload Photo to feed or story, just configure 'post' to 'feed' or 'story'
-  const { media } = await instaClient.uploadPhoto({ photo: photo, caption: text, post: 'feed' })
-  console.log(`https://www.instagram.com/p/${media.code}/`)
+        // ====== INSTAGRAM ======= //
+        await instaClient.login()
+        // Upload Photo to feed or story, just configure 'post' to 'feed' or 'story'
+        const { media } = await instaClient.uploadPhoto({ photo: photo, caption: text, post: 'feed' })
+        console.log(`https://www.instagram.com/p/${media.code}/`)
        
-       const embed_insta = new Discord.MessageEmbed()
-         .setColor(embed_color)
-         .setTitle('**New Instagram post**')
-         .addField('Content:', text)
-         .addField('Post:', `https://www.instagram.com/p/${media.code}/`)
-         .setImage(photo)
-  msg.channel.send(embed_insta)
+        const embed_insta = new Discord.MessageEmbed()
+            .setColor(embed_color)
+            .setTitle('**New Instagram post**')
+            .addField('Content:', text)
+            .addField('Post:', `https://www.instagram.com/p/${media.code}/`)
+           .setImage(photo)
+        msg.channel.send(embed_insta)
        
        // ======= TWITTER ======= //
        
-       client.post('statuses/update', { status: the_text }).then(result => {
-         const embed = new Discord.MessageEmbed()
-         .setColor(embed_color)
-         .setTitle('**New Tweet**')
-         .addField('Content:', the_text)
-  msg.channel.send(embed)
-}).catch(console.error);
+        client.post('statuses/update', { status: the_text }).then(result => {
+            const embed = new Discord.MessageEmbed()
+                .setColor(embed_color)
+                .setTitle('**New Tweet**')
+                .addField('Content:', the_text)
+            msg.channel.send(embed)
+        }).catch(console.error);
        
     }
-    };
+};
 

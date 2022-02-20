@@ -1,7 +1,7 @@
 const { Command } = require('discord.js-commando');
 const Discord = require('discord.js');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
 
 module.exports = class KickCommand extends Command {
   constructor(client) {
@@ -32,7 +32,7 @@ module.exports = class KickCommand extends Command {
   }
 
   run(message, { userToBan, reason }) {
-    var sender = message.author.id;
+    let sender = message.author.id;
     const user =
       message.mentions.members.first() ||
       message.guild.members.fetch(userToBan);
@@ -44,13 +44,13 @@ module.exports = class KickCommand extends Command {
       .setTitle('❌ `I can not interact with that user. Please check my and theirs permission!`')
       .setTimestamp()
       
-      const kickembed2 = new Discord.MessageEmbed()
+    const kickembed2 = new Discord.MessageEmbed()
       .setColor(embed_color)
       .setTitle('❌ `I can not interact with that user. I need premission BAN_MEMBERS.`')
       
-      if (message.guild.member(user).hasPermission('ADMINISTRATOR')) return message.reply({ embed: kickembed});
-      if (message.guild.member(user).hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed});
-      if (message.guild.member(user).hasPermission('KICK_MEMBERS')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('ADMINISTRATOR')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed});
+    if (message.guild.member(user).hasPermission('KICK_MEMBERS')) return message.reply({ embed: kickembed});
 		if (!message.guild.me.hasPermission('BAN_MEMBERS')) return message.reply({ embed: kickembed2});
 
     

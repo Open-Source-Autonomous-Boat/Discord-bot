@@ -3,7 +3,7 @@ const request = require('node-superfetch');
 const { GOOGLE_KEY, CUSTOM_SEARCH_ID } = process.env;
 const Discord = require('discord.js');
 const oneLine = require('common-tags').oneLine;
-var embed_color = process.env.EMBED;
+let embed_color = process.env.EMBED;
 
 
 module.exports = class GoogleCommand extends commando.Command {

@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
-var youtube_api_key = process.env.YOUTUBE_API_KEY;
+let youtube_api_key = process.env.YOUTUBE_API_KEY;
 
-var name = "yt"
+let name = "yt"
 module.exports = class YTCommand extends commando.Command {
     constructor(client) {
         super(client, {
@@ -17,7 +17,7 @@ module.exports = class YTCommand extends commando.Command {
     }
 
     async run(msg, args) {
-        var search_query = args;
+        let search_query = args;
         console.log(search_query);
         if (args.length < 1 ) {
             msg.reply("Make sure to add some search terms so I know what YouTube video to get you \nEg: `;yt Swedish House Mafia greyhound`");
@@ -45,8 +45,8 @@ module.exports = class YTCommand extends commando.Command {
                     msg.reply("No results found :( Try another search maybe?")
                 }
                 else {
-                    var video_id = res.data.items[0].id.videoId;
-                    var video_url = `https://www.youtube.com/watch?v=${video_id}`
+                    let video_id = res.data.items[0].id.videoId;
+                    let video_url = `https://www.youtube.com/watch?v=${video_id}`
                     console.log(video_url)
                     msg.reply(video_url)
                 }
@@ -54,7 +54,7 @@ module.exports = class YTCommand extends commando.Command {
             searchYouTube(msg, search_query);
     
         }
-        function getRandomNumber(min, max) {
+        let getRandomNumber = (min, max) => {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 

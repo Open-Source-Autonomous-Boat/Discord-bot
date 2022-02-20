@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
-var announce_channel = process.env.ANNOUNCE_CHANNEL
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
+let announce_channel = process.env.ANNOUNCE_CHANNEL
 const Discord = require('discord.js');
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('./database.json');
@@ -14,8 +14,7 @@ module.exports = class MuteCommand extends commando.Command {
       aliases: [],
       memberName: 'announce',
       group: 'moderation',
-      description:
-        'Announce stuff!',
+      description: 'Announce stuff!',
       guildOnly: true,
       userPermissions: ['ADMINISTRATOR'],
       cooldown: 15000,
@@ -33,33 +32,33 @@ module.exports = class MuteCommand extends commando.Command {
   }
 
   async run(message, { reason }) {
-    var user_id = message.author.id;
-    var user_tag = message.author.tag;
+    let user_id = message.author.id;
+    let user_tag = message.author.tag;
 
     const extractNumber = /\d+/g;
     
     const if_has_ac = db.has('announcment');
     
     if (if_has_ac === true) {
-        db.delete('announcment');
+      db.delete('announcment');
         
-        db.set('announcment', reason);
+      db.set('announcment', reason);
   
-      }
+    }
     else {
-        db.set('announcment', reason);
+      db.set('announcment', reason);
     }
     
     
     
 
-      message.client.channels.cache.get(announce_channel).send(reason);
+    message.client.channels.cache.get(announce_channel).send(reason);
       
-        const announceMsg = new Discord.MessageEmbed()
-          .addField(' 🔔 **New Announcment was posted!**', `Posted by: <@${message.author.id}>`)
-          .addField('Message', reason)
-          .setTimestamp()
-          .setColor(embed_color);
+    const announceMsg = new Discord.MessageEmbed()
+      .addField(' 🔔 **New Announcment was posted!**', `Posted by: <@${message.author.id}>`)
+      .addField('Message', reason)
+      .setTimestamp()
+      .setColor(embed_color);
     
     message.reply({ embed: announceMsg })
       

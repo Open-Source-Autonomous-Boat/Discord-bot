@@ -1,7 +1,7 @@
 const commando = require('discord.js-commando');
-var embed_color = process.env.EMBED;
-var log_channel = process.env.LOGGING_CHANNEL_ID;
-var announce_channel = process.env.ANNOUNCE_CHANNEL
+let embed_color = process.env.EMBED;
+let log_channel = process.env.LOGGING_CHANNEL_ID;
+let announce_channel = process.env.ANNOUNCE_CHANNEL
 const Discord = require('discord.js');
 
 
@@ -13,8 +13,7 @@ module.exports = class MuteCommand extends commando.Command {
       aliases: [],
       memberName: 'say',
       group: 'moderation',
-      description:
-        'Announce stuff!',
+      description: 'Announce stuff!',
       guildOnly: true,
       userPermissions: ['ADMINISTRATOR'],
       cooldown: 15000,
