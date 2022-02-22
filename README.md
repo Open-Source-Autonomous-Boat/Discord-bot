@@ -7,9 +7,4 @@
  ### Other use
  - Posting media on Twitter and Instagram 
 
-### Self hosting
- **Dont self host the bot**, only reason it's code is public is for transparency reasons. 
- I suggest you dont copy it's code or distribute it!
- 
-
-Made by [Sirius](https://bio.link/sirius)
+Made by [Sirius](https://bio.link/sirius) for [OSAB Discord Server](https://discord.gg/C5H9EE7Rp3)
