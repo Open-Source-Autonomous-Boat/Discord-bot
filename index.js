@@ -1,36 +1,13 @@
 
 // === .env import === //
-let token = process.env.TOKEN;
-let embed_color = process.env.EMBED;
-const nasa_api = process.env.NASA_API;
-let API_KEY = process.env.API_KEY;
-let API_KEY_SECRET = process.env.API_KEY_SECRET;
-let ACCES_TOKEN = process.env.ACCES_TOKEN;
-let ACCES_SECRET = process.env.ACCES_SECRET;
-let username = process.env.INSTA_USER;
-let password = process.env.INSTA_PASS;
-let owner_discord_id = process.env.OWNER_DISCORD_ID;
 let channel_id = process.env.LOGGING_CHANNEL_ID;
-let status_id = process.env.BOT_STATUS_CHANNEL;
-let general_chat = process.env.GENERAL_CHAT;    
+const envImports = require('./constants/env-imports');
 
-// === TWITTER NPM === //
-const twitter = require('twitter-lite');
-const twitterclient = new twitter({
-  subdomain: "api", // "api" is the default (change for other subdomains)
-  version: "1.1", // version "1.1" is the default (change for other subdomains)
-  consumer_key: API_KEY, // from Twitter.
-  consumer_secret: API_KEY_SECRET, // from Twitter.
-  access_token_key: ACCES_TOKEN, // from your User (oauth_token)
-  access_token_secret: ACCES_SECRET // from your User (oauth_token_secret)
-});
-// === INSTAGRAM NPM === //
-const Instagram = require('instagram-web-api')
-const instaClient = new Instagram({ username, password })
-
+// SOCIAL MEDIA NPM OBJECTS
+const instaClient = require('./npm-objects/insta-npm');
+const twitterclient = require('./npm-objects/twitter-npm');
 
 // OTHER NPM MODULES
-
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('./database.json');
 const fetch = require('node-fetch')
@@ -41,6 +18,7 @@ const path = require("path");
 const oneLine = require("common-tags").oneLine;
 const sqlite = require("sqlite");
 sqlite.open("./database.sqlite3");
+
 // === ANTI SPAM === //
 const AntiSpam = require('discord-anti-spam');
 const antiSpam = new AntiSpam({
@@ -65,7 +43,7 @@ const antiSpam = new AntiSpam({
 });
 
 const client = new commando.Client({
-  owner: owner_discord_id,
+  owner: envImports.OWNER_DISCORD_ID,
   commandPrefix: "!",
   disableEveryone: true,
   unknownCommandResponse: false
@@ -142,7 +120,7 @@ client
     let message = `Prefix ${
       prefix === "" ? "removed" : `changed to ${prefix || "the default"}`
     } ${guild ? `in guild ${guild.name} (${guild.id})` : "globally"}.`;
-    client.channels.cache.get(channel_id).send(` ${message}`);
+    client.channels.cache.get(envImports.CHANNEL_ID).send(` ${message}`);
 
     console.log(`PREFIX CHANGE: ${prefix}`);
   })
@@ -283,28 +261,28 @@ client.on('message', (message) => antiSpam.message(message));
 antiSpam.on("warnAdd", (member) => {
   const warnEmbed = new Discord.MessageEmbed()
     .setTitle('⚠️ Warned:' + ' ' + member.user.tag + ' ' + 'for spamming!' )
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: warnEmbed})
 });
 antiSpam.on("muteAdd", (member) => {
   const muteEmbed = new Discord.MessageEmbed()
     .setTitle('🔇 Muted:' + ' ' + member.user.tag + ' ' + 'for spamming!' )
     .setDescription('They went a bit too far!')
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: muteEmbed})
 });
 antiSpam.on("kickAdd", (member) => {
   const kickEmbed = new Discord.MessageEmbed()
     .setTitle('🥾 Kicked:' + ' ' + member.user.tag + ' ' + 'for spamming!' )
     .setDescription('They went too far with it!')
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: kickEmbed})
 });
 antiSpam.on("banAdd", (member) => {
   const banEmbed = new Discord.MessageEmbed()
     .setTitle('🔨 Banned:' + ' ' + member.user.tag + ' ' + 'for spamming!' )
     .setDescription('They went too too far with it!')
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: banEmbed})
 });
 // ========= LOGS ========== // 
@@ -331,42 +309,42 @@ client.on("guildMemberRemove", member => {
 client.on("guildBanAdd", (guild, user) => {
   const banEmbed = new Discord.MessageEmbed()
     .addField('🔨 Banned:', user)
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: banEmbed})
 });
 
 client.on("guildBanRemove", (guild, user) => {
   const unbanEmbed = new Discord.MessageEmbed()
     .addField('Unbanned:', user)
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: unbanEmbed})
 });
 
 client.on("roleCreate", (role) => {
   const roleEmbed = new Discord.MessageEmbed()
     .addField('Role created:', role)
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: roleEmbed})
 });
 
 client.on("roleDelete", (role) => {
   const roleEmbed = new Discord.MessageEmbed()
     .addField('Role deleted:', role)
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: roleEmbed})
 });
 
 client.on("emojiCreate", (emoji) => {
   const emojiEmbed = new Discord.MessageEmbed()
     .addField('New emoji:', emoji)
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: emojiEmbed})
 });
 
 client.on("emojiDelete", (emoji) => {
   const emojiEmbed = new Discord.MessageEmbed()
     .addField('Deleted emoji:', emoji)
-    .setColor(embed_color);
+    .setColor(envImports.EMBED_COLOR);
   client.channels.cache.get(channel_id).send({embed: emojiEmbed})
 });
 
@@ -423,4 +401,4 @@ client.registry
   .registerCommandsIn(path.join(__dirname, "commands"));
 
 // ==== client login ==== //
-client.login(token);
+client.login(envImports.TOKEN);

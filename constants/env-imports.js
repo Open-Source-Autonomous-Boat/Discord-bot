@@ -1,0 +1,31 @@
+// === .env import === //
+
+const TOKEN = process.env.TOKEN;
+const EMBED_COLOR = process.env.EMBED;
+const NASA_API = process.env.NASA_API;
+const API_KEY = process.env.API_KEY;
+const API_KEY_SECRET = process.env.API_KEY_SECRET;
+const ACCES_TOKEN = process.env.ACCES_TOKEN;
+const ACCES_SECRET = process.env.ACCES_SECRET;
+const INSTA_USERNAME = process.env.INSTA_USER;
+const INSTA_PASSWORD = process.env.INSTA_PASS;
+const OWNER_DISCORD_ID = process.env.OWNER_DISCORD_ID;
+const CHANNEL_ID = process.env.LOGGING_CHANNEL_ID;
+const STATUS_ID = process.env.BOT_STATUS_CHANNEL;
+const GENERAL_CHAT = process.env.GENERAL_CHAT;
+
+module.exports = {
+    TOKEN: TOKEN,
+    EMBED_COLOR: EMBED_COLOR,
+    NASA_API: NASA_API,
+    API_KEY: API_KEY,
+    API_KEY_SECRET: API_KEY_SECRET,
+    ACCES_TOKEN: ACCES_TOKEN,
+    ACCES_SECRET: ACCES_SECRET,
+    INSTA_USERNAME: INSTA_USERNAME,
+    INSTA_PASSWORD: INSTA_PASSWORD,
+    OWNER_DISCORD_ID: OWNER_DISCORD_ID,
+    CHANNEL_ID: CHANNEL_ID,
+    STATUS_ID: STATUS_ID,
+    GENERAL_CHAT: GENERAL_CHAT
+}
