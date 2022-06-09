@@ -45,69 +45,16 @@ const client = require('./bot-client/client');
 
 let bot_prefix = "!";
 // ==== READY EVENT ==== ///
-client.on("ready", require('./bot-client/bot-events/bot-ready'));
+const readyHandler = require('./bot-client/bot-events/bot-ready');
+client.on("ready", readyHandler);
 
 // Command specific event listeners that come with the Commando module
-client.on("messageCreate", require('./bot-client/bot-events/bot-message'));
- 
+const botMessageCmdsHandler = require('./bot-client/bot-events/bot-message-cmds');
+client.on("messageCreate", botMessageCmdsHandler);
+
 //Automod and autoresponse
-
-client.on("message", (message) => {
-  if (message.author.bot) return;
-  
-  let bad_words = [ 'dick', 'Dick', 'arrogant', 'Bitch', 'bitch', 'Arrogant', 'cock', 'Cock', 'Nigger', 'nigger', 'niger', 'Niger' ]
-  let bad_links = [ 'grabify', 'solarwinds', 'iplogger'  ]
-  let nsfw = [ 'porn', 'Porn']
-  
-  //Bad Words
-  
-  let foundInText = false;
-  for (let i in bad_words) {
-    if(message.content.toLowerCase().includes(bad_words[i].toLowerCase())) foundInText = true;
-  }
-
-if(foundInText) {
-  message.delete();
-  message.channel.send(` <@!${message.author.id}> **Thats not nice to say!**`)
-}
-  
-  // LINKS
-  
-  let uoundInText = false;
-  for (let i in bad_links) {
-    if(message.content.toLowerCase().includes(bad_links[i].toLowerCase())) uoundInText = true;
-  }
-
-  if(uoundInText) {
-    message.delete();
-    message.channel.send(` <@!${message.author.id}> **That kind of link is restricted!**`)
-  }
-
-  //NSFW
-  
-  let doundInText = false;
-  for (let i in nsfw) {
-    if(message.content.toLowerCase().includes(nsfw[i].toLowerCase())) doundInText = true;
-  }
-
-  if(doundInText) {
-    message.delete();
-    message.channel.send(` <@!${message.author.id}> **No NSFW!**`)
-  }
-  
-  //OTHER
-  
-  
-  
-      
-  if (message.content.includes("!d bump")) {
-    let responseString = `I will remind you to bump again in 2 hours! <@!${message.author.id}>`;
-    message.channel.send(responseString);
-    setTimeout(() => {
-      message.channel.send(`<@!${message.author.id}> 🕒 2 hours have passed, bump the server again!`);
-    }, 7200000);
-  }
-});
+const botMessageAutomodHandler = require('./bot-client/bot-events/bot-message-mod');
+client.on("messageCreate", botMessageAutomodHandler);
 
 // ========= ANTI SPAM ========== //
 client.on('messageCreate', (message) => antiSpam.message(message)); 
